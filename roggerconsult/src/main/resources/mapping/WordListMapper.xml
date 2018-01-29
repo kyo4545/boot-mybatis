@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rogger.mappers.WordListMapper">
+  <resultMap id="BaseResultMap" type="com.rogger.model.WordList" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="dicType" property="dictype" jdbcType="VARCHAR" />
+    <result column="dicTypeName" property="dictypename" jdbcType="VARCHAR" />
+    <result column="dicNo" property="dicno" jdbcType="VARCHAR" />
+    <result column="dicName" property="dicname" jdbcType="VARCHAR" />
+    <result column="isDel" property="isdel" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, dicType, dicTypeName, dicNo, dicName, isDel
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from wordlist
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from wordlist
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.rogger.model.WordList" >
+    insert into wordlist (id, dicType, dicTypeName, 
+      dicNo, dicName, isDel
+      )
+    values (#{id,jdbcType=VARCHAR}, #{dictype,jdbcType=VARCHAR}, #{dictypename,jdbcType=VARCHAR}, 
+      #{dicno,jdbcType=VARCHAR}, #{dicname,jdbcType=VARCHAR}, #{isdel,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.rogger.model.WordList" >
+    insert into wordlist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dictype != null" >
+        dicType,
+      </if>
+      <if test="dictypename != null" >
+        dicTypeName,
+      </if>
+      <if test="dicno != null" >
+        dicNo,
+      </if>
+      <if test="dicname != null" >
+        dicName,
+      </if>
+      <if test="isdel != null" >
+        isDel,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="dictype != null" >
+        #{dictype,jdbcType=VARCHAR},
+      </if>
+      <if test="dictypename != null" >
+        #{dictypename,jdbcType=VARCHAR},
+      </if>
+      <if test="dicno != null" >
+        #{dicno,jdbcType=VARCHAR},
+      </if>
+      <if test="dicname != null" >
+        #{dicname,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.rogger.model.WordList" >
+    update wordlist
+    <set >
+      <if test="dictype != null" >
+        dicType = #{dictype,jdbcType=VARCHAR},
+      </if>
+      <if test="dictypename != null" >
+        dicTypeName = #{dictypename,jdbcType=VARCHAR},
+      </if>
+      <if test="dicno != null" >
+        dicNo = #{dicno,jdbcType=VARCHAR},
+      </if>
+      <if test="dicname != null" >
+        dicName = #{dicname,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        isDel = #{isdel,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.rogger.model.WordList" >
+    update wordlist
+    set dicType = #{dictype,jdbcType=VARCHAR},
+      dicTypeName = #{dictypename,jdbcType=VARCHAR},
+      dicNo = #{dicno,jdbcType=VARCHAR},
+      dicName = #{dicname,jdbcType=VARCHAR},
+      isDel = #{isdel,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
